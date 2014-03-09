@@ -46,7 +46,7 @@ def Search( item ):
     soup = BeautifulSoup(data)
     results = soup.find_all(attrs={"class":"post"})
     for it in results:
-        link = it.find_all('a')[4].get('href').encode('utf-8')
+        link = it.find(text=re.compile('\S*【字幕下载】\S*'.decode('utf-8'))).next.get('href').encode('utf-8')
         match = re.compile('【对应版本】(.+?)\n'.decode('utf-8')).search(it.text)
         if match:
             name = match.group(1).encode('utf-8')
